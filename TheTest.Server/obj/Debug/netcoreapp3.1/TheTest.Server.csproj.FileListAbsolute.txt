@@ -65,3 +65,4 @@ C:\Users\abdeljalil\Desktop\The-Test\TheTest.Server\TheTest.Server\obj\Debug\net
 C:\Users\abdeljalil\Desktop\The-Test\TheTest.Server\TheTest.Server\obj\Debug\netcoreapp3.1\TheTest.Server.dll
 C:\Users\abdeljalil\Desktop\The-Test\TheTest.Server\TheTest.Server\obj\Debug\netcoreapp3.1\TheTest.Server.pdb
 C:\Users\abdeljalil\Desktop\The-Test\TheTest.Server\TheTest.Server\obj\Debug\netcoreapp3.1\TheTest.Server.genruntimeconfig.cache
+C:\Users\abdeljalil\Desktop\The-Test\TheTest.Server\TheTest.Server\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

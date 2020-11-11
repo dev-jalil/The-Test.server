@@ -13,6 +13,7 @@ using System;
 using System.Text;
 using TheTest.Server.Data;
 using TheTest.Server.Data.Models;
+using TheTest.Server.Infrastructure;
 
 namespace TheTest.Server
 {
@@ -32,7 +33,15 @@ namespace TheTest.Server
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services
-                .AddIdentity<User, IdentityRole>()
+                .AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                }
+                )
                 .AddEntityFrameworkStores<TheTestDbContext>();
 
             // configure strongly typed settings objects
@@ -59,7 +68,7 @@ namespace TheTest.Server
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                    ClockSkew = TimeSpan.Zero
+                    //ClockSkew = TimeSpan.Zero
                 };
             });
 
@@ -73,14 +82,16 @@ namespace TheTest.Server
         {
             if (env.IsDevelopment())
             {
-                
-                app.UseDatabaseErrorPage();
+             app.UseDeveloperExceptionPage();
             }
-           
-            //app.UseHttpsRedirection();
-            //app.UseStaticFiles();
 
             app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -89,11 +100,9 @@ namespace TheTest.Server
             {
                 endpoints.MapControllers();
 
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
             });
+
+            app.ApplyMigrations();
         }
     }
 }
