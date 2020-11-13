@@ -13,5 +13,6 @@ namespace TheTest.Server.Data
             : base(options)
         {
         }
+        public DbSet<Data.Models.Personne> Personne { get; set; }
     }
 }
